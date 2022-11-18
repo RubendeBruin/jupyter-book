@@ -2,6 +2,18 @@
 
 __version__ = "0.13.1"
 
+# Select compatible event loop for Tornado
+# Default value on Windows changed with python 3.8
+
+import asyncio
+import sys
+
+if sys.platform == "win32" and sys.version_info.minor >= 8:
+        asyncio.set_event_loop_policy(
+            asyncio.WindowsSelectorEventLoopPolicy()
+        )
+
+
 
 # We connect this function to the step after the builder is initialized
 def setup(app):
